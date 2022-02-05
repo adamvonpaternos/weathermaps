@@ -127,3 +127,10 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+
+# Misc
+.DS_Store
+
+# Helm extra values
+**/*.extra.yaml

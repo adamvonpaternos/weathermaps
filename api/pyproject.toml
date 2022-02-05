@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "weathermaps"
+version = "0.1.0"
+description = ""
+authors = ["Adam von Paternos <adam.vonpaternos@gmail.com>"]
+
+packages = [
+    { include = "weathermaps", from = "src" },
+]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+fastapi = {extras = ["extra"], version = "^0.72.0"}
+requests = "^2.27.1"
+uvicorn = "^0.17.4"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+

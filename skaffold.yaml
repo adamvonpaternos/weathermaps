@@ -1,0 +1,36 @@
+apiVersion: skaffold/v2beta23
+kind: Config
+profiles:
+  - name: dev
+    build:
+      artifacts:
+        - image: weathermaps-api
+          context: api/
+          docker:
+            dockerfile: api/Dockerfile
+            target: app
+      local:
+        push: true
+        useBuildkit: true
+    deploy:
+      kubeContext: cpath
+      helm:
+        releases:
+          - name: weathermaps-api
+            namespace: dev
+            chartPath: ./
+            valuesFiles:
+              - values.dev.yaml
+              - values.dev.extra.yaml
+            artifactOverrides:
+              image: weathermaps-api
+            imageStrategy:
+              helm: {}
+        flags:
+          global:
+            - --debug
+          install:
+            - --atomic
+          upgrade:
+            - --install
+            - --atomic
