@@ -37,28 +37,23 @@ spec:
             - configMapRef:
                 name: {{ include "weathermaps.fullname" . }}-env
           env:
-            - name: FASTAPI_PW
+            - name: OPEN_WEATHER_API_KEY
               valueFrom:
                 secretKeyRef:
                   name: {{ include "weathermaps.fullname" . }}-env
-                  key: FASTAPI_PW
-            - name: ORTHANC_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: {{ include "weathermaps.fullname" . }}-env
-                  key: ORTHANC_PASSWORD
+                  key: OPEN_WEATHER_API_KEY
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
               protocol: TCP
-          # livenessProbe:
-          #   httpGet:
-          #     path: /
-          #     port: http
-          # readinessProbe:
-          #   httpGet:
-          #     path: /
-          #     port: http
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}

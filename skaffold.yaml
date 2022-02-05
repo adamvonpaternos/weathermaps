@@ -13,7 +13,7 @@ profiles:
         push: true
         useBuildkit: true
     deploy:
-      kubeContext: cpath
+      kubeContext: microk8s
       helm:
         releases:
           - name: weathermaps-api
